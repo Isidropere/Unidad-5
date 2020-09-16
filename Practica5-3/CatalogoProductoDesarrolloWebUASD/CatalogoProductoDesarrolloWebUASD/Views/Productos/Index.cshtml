@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CatalogoProductoDesarrolloWebUASD.Models.ModelDB.Producto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantExistencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producto1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantExistencia)
+        </td>
+        <td>
+          
+            @*@Html.DisplayFor(modelItem => item.ImageURL)*@
+            <img src="~/Imagen/Producto/@Html.DisplayFor(modelItem => item.ImageURL)" class="img-circle" atl="kulu" withd="100" height="70" />
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductoID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmpleadosDBModelStoreContainer" CdmEntityContainer="EmpleadosDBEntities">
+    <EntitySetMapping Name="Departamentoes">
+      <EntityTypeMapping TypeName="EmpleadosDBModel.Departamento">
+        <MappingFragment StoreEntitySet="Departamentoes">
+          <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleadoes">
+      <EntityTypeMapping TypeName="EmpleadosDBModel.Empleado">
+        <MappingFragment StoreEntitySet="Empleadoes">
+          <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Registroes">
+      <EntityTypeMapping TypeName="EmpleadosDBModel.Registro">
+        <MappingFragment StoreEntitySet="Registroes">
+          <ScalarProperty Name="RegistroID" ColumnName="RegistroID" />
+          <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+          <ScalarProperty Name="DepartemantoID" ColumnName="DepartemantoID" />
+          <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+          <ScalarProperty Name="Departamento_DepartamentoID" ColumnName="Departamento_DepartamentoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

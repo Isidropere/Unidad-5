@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Practica5_2DesarrolloWebUASD.Models.ModelDB.Departamento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container mt-3">
+
+    <h2>Lista de Departemento</h2>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <a class=" btn btn-success" style="margin-bottom:10px" href="/Departamentoes/Create">
+                Create New
+            </a>
+        </div>
+        <div class="col-lg-10">
+            <input class="form-control" id="input_search" name="search" type="text" placeholder="busqueda..." />
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    
+                    <th> Acciones </th>
+                </tr>
+            </thead>
+            <tbody id="table_body">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                           
+                            <a href="/Departamentoes/Edit?id=@item.DepartamentoID" class="btn btn-primary">Edit</a>
+                            <a href="/Departamentoes/Edit?id=@item.DepartamentoID" class="btn btn-success">Details</a>
+                            <a href="/Departamentoes/Edit?id=@item.DepartamentoID" class="btn btn-danger">Delete</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @*@buscar por cualquier elmento de la tablas*@
+    @section scripts
+        {
+        <script>
+            $(document).ready(function () {
+                $("#input_search").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#table_body tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+
+        </script>
+    }
+</div>

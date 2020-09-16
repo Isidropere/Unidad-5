@@ -1,0 +1,50 @@
+﻿@model Practica5_2DesarrolloWebUASD.Models.ModelDB.Registro
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Registro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sueldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sueldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartemantoID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartemantoID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Departamento.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departamento.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleado.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleado.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RegistroID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

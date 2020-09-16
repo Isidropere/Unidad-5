@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EstudianteDBModelStoreContainer" CdmEntityContainer="EstudianteDBEntities">
+    <EntitySetMapping Name="tblEstudiantes">
+      <EntityTypeMapping TypeName="EstudianteDBModel.tblEstudiante">
+        <MappingFragment StoreEntitySet="tblEstudiante">
+          <ScalarProperty Name="EstudianteID" ColumnName="EstudianteID" />
+          <ScalarProperty Name="Nombes" ColumnName="Nombes" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="ImagenURL" ColumnName="ImagenURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

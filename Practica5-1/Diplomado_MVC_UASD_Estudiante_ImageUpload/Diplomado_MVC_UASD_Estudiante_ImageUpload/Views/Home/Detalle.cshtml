@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<h2>Detalle</h2>
+<head>
+    <style>
+        .linkbtnfull {
+            background-color: #f44336;
+            color: white;
+            font-size: medium;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: initial;
+            display: inline-block;
+        }
+
+        table {
+            font-family: Arial,sans-serif;
+            border-collapse: collapse;
+            width: 100%
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd
+        }
+    </style>
+</head>
+@{
+    Diplomado_MVC_UASD_Estudiante_ImageUpload.Models.EstudianteDBEntities db = new Diplomado_MVC_UASD_Estudiante_ImageUpload.Models.EstudianteDBEntities();
+
+}
+<body>
+    <h2 style="background-color:black; color:white; text-align:center;font-style:oblique">
+        Detalle del estudiante
+    </h2>
+    @using (Html.BeginForm())
+    {
+        <div class="well">
+            <table align="center" border="1" cellpadding="4" cellspacing="4">
+                <thead>
+                    <tr>
+                        <th style="background-color:black;color:white">Foto</th>
+                        <th style="background-color:black;color:white">Nombres</th>
+                        <th style="background-color:black;color:white">Apellidos</th>
+                        <th style="background-color:black;color:white">Direccion</th>
+                        <th style="background-color:black;color:white">Telefono</th>
+                        <th style="background-color:black;color:white">Cedula</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in db.tblEstudiantes)
+                    {
+                        <tr>
+
+                            <td>
+                               @*por alguna razon esto no funciona llamado al modelo diresctamente*@ 
+                                <img src="~/Views/Home/Images/@Html.DisplayFor(modelItem => @item.ImagenURL)" class="img-circle" atl="kulu" withd="100" height="70" />
+                            </td>
+                            <td>@item.Nombes</td>
+                            <td>@item.Apellidos</td>
+                            <td>@item.Direccion</td>
+                            <td>@item.Telefono</td>
+                            <td>@item.Cedula</td>
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+</body>
+

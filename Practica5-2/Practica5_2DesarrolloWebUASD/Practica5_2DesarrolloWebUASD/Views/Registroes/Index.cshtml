@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Practica5_2DesarrolloWebUASD.Models.ModelDB.Registro>
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container mt-3">
+
+    <h2>Lista</h2>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <a class=" btn btn-success" style="margin-bottom:10px" href="/Registroes/Create">
+                Create New
+            </a>
+        </div>
+        <div class="col-lg-10">
+            <input class="form-control" id="input_search" name="search" type="text" placeholder="busqueda..." />
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sueldo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DepartemantoID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departamento.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Empleado.Nombre)
+                    </th>
+
+                    <th> Acciones </th>
+                </tr>
+            </thead>
+            <tbody id="table_body">
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sueldo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartemantoID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departamento.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+                    </td>
+                    <td>
+
+                        <a href="/Registroes/Edit?id=@item.RegistroID" class="btn btn-primary">Edit</a>
+                        <a href="/Registroes/Edit?id=@item.RegistroID" class="btn btn-success">Details</a>
+                        <a href="/Registroes/Edit?id=@item.RegistroID" class="btn btn-danger">Delete</a>
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @*@buscar por cualquier elmento de la tablas*@
+    @section scripts
+        {
+        <script>
+            $(document).ready(function () {
+                $("#input_search").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#table_body tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+
+        </script>
+    }
+</div>
+
+

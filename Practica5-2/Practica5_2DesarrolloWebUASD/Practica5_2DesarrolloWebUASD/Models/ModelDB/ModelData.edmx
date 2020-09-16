@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EmpleadosDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departamentoes">
+          <Key>
+            <PropertyRef Name="DepartamentoID" />
+          </Key>
+          <Property Name="DepartamentoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Empleadoes">
+          <Key>
+            <PropertyRef Name="EmpleadoID" />
+          </Key>
+          <Property Name="EmpleadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="Apellidos" Type="nvarchar(max)" />
+          <Property Name="Fecha_Ingreso" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Registroes">
+          <Key>
+            <PropertyRef Name="RegistroID" />
+          </Key>
+          <Property Name="RegistroID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sueldo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DepartemantoID" Type="int" Nullable="false" />
+          <Property Name="EmpleadoID" Type="int" Nullable="false" />
+          <Property Name="Departamento_DepartamentoID" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_Registroes_dbo_Departamentoes_Departamento_DepartamentoID">
+          <End Role="Departamentoes" Type="Self.Departamentoes" Multiplicity="0..1" />
+          <End Role="Registroes" Type="Self.Registroes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentoes">
+              <PropertyRef Name="DepartamentoID" />
+            </Principal>
+            <Dependent Role="Registroes">
+              <PropertyRef Name="Departamento_DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Registroes_dbo_Empleadoes_EmpleadoID">
+          <End Role="Empleadoes" Type="Self.Empleadoes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Registroes" Type="Self.Registroes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleadoes">
+              <PropertyRef Name="EmpleadoID" />
+            </Principal>
+            <Dependent Role="Registroes">
+              <PropertyRef Name="EmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpleadosDBModelStoreContainer">
+          <EntitySet Name="Departamentoes" EntityType="Self.Departamentoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleadoes" EntityType="Self.Empleadoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registroes" EntityType="Self.Registroes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Registroes_dbo_Departamentoes_Departamento_DepartamentoID" Association="Self.FK_dbo_Registroes_dbo_Departamentoes_Departamento_DepartamentoID">
+            <End Role="Departamentoes" EntitySet="Departamentoes" />
+            <End Role="Registroes" EntitySet="Registroes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Registroes_dbo_Empleadoes_EmpleadoID" Association="Self.FK_dbo_Registroes_dbo_Empleadoes_EmpleadoID">
+            <End Role="Empleadoes" EntitySet="Empleadoes" />
+            <End Role="Registroes" EntitySet="Registroes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmpleadosDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="DepartamentoID" />
+          </Key>
+          <Property Name="DepartamentoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Registroes" Relationship="Self.FK_dbo_Registroes_dbo_Departamentoes_Departamento_DepartamentoID" FromRole="Departamentoes" ToRole="Registroes" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="EmpleadoID" />
+          </Key>
+          <Property Name="EmpleadoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Ingreso" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Registroes" Relationship="Self.FK_dbo_Registroes_dbo_Empleadoes_EmpleadoID" FromRole="Empleadoes" ToRole="Registroes" />
+        </EntityType>
+        <EntityType Name="Registro">
+          <Key>
+            <PropertyRef Name="RegistroID" />
+          </Key>
+          <Property Name="RegistroID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sueldo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DepartemantoID" Type="Int32" Nullable="false" />
+          <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
+          <Property Name="Departamento_DepartamentoID" Type="Int32" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_dbo_Registroes_dbo_Departamentoes_Departamento_DepartamentoID" FromRole="Registroes" ToRole="Departamentoes" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_dbo_Registroes_dbo_Empleadoes_EmpleadoID" FromRole="Registroes" ToRole="Empleadoes" />
+        </EntityType>
+        <Association Name="FK_dbo_Registroes_dbo_Departamentoes_Departamento_DepartamentoID">
+          <End Role="Departamentoes" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Registroes" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentoes">
+              <PropertyRef Name="DepartamentoID" />
+            </Principal>
+            <Dependent Role="Registroes">
+              <PropertyRef Name="Departamento_DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Registroes_dbo_Empleadoes_EmpleadoID">
+          <End Role="Empleadoes" Type="Self.Empleado" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Registroes" Type="Self.Registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleadoes">
+              <PropertyRef Name="EmpleadoID" />
+            </Principal>
+            <Dependent Role="Registroes">
+              <PropertyRef Name="EmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpleadosDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
+          <EntitySet Name="Empleadoes" EntityType="Self.Empleado" />
+          <EntitySet Name="Registroes" EntityType="Self.Registro" />
+          <AssociationSet Name="FK_dbo_Registroes_dbo_Departamentoes_Departamento_DepartamentoID" Association="Self.FK_dbo_Registroes_dbo_Departamentoes_Departamento_DepartamentoID">
+            <End Role="Departamentoes" EntitySet="Departamentoes" />
+            <End Role="Registroes" EntitySet="Registroes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Registroes_dbo_Empleadoes_EmpleadoID" Association="Self.FK_dbo_Registroes_dbo_Empleadoes_EmpleadoID">
+            <End Role="Empleadoes" EntitySet="Empleadoes" />
+            <End Role="Registroes" EntitySet="Registroes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmpleadosDBModelStoreContainer" CdmEntityContainer="EmpleadosDBEntities">
+          <EntitySetMapping Name="Departamentoes">
+            <EntityTypeMapping TypeName="EmpleadosDBModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamentoes">
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleadoes">
+            <EntityTypeMapping TypeName="EmpleadosDBModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleadoes">
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registroes">
+            <EntityTypeMapping TypeName="EmpleadosDBModel.Registro">
+              <MappingFragment StoreEntitySet="Registroes">
+                <ScalarProperty Name="RegistroID" ColumnName="RegistroID" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="DepartemantoID" ColumnName="DepartemantoID" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="Departamento_DepartamentoID" ColumnName="Departamento_DepartamentoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
